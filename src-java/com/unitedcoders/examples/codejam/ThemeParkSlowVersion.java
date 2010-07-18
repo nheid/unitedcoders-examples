@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * Example of an slow implementation to the Google Code Jam: Theme Park
@@ -22,22 +23,24 @@ public class ThemeParkSlowVersion {
 			IOException {
 		// TODO Auto-generated method stub
 
-		FileInputStream inFile = new FileInputStream(new File("C-large.in"));
+		FileInputStream inFile = new FileInputStream(new File("resources/codejam/ThemePark.in"));
 		DataInputStream in = new DataInputStream(inFile);
 		FileOutputStream outFile = new FileOutputStream(new File("out.txt"));
 		DataOutputStream out = new DataOutputStream(outFile);
 		
 		
 		int cases = Integer.parseInt(in.readLine());
+		
+		long starttime = new Date().getTime();
 
 		for (int i = 1; i <= cases; i++) {
 			
 			String[] input = in.readLine().split("\\ ");
 			int r = Integer.parseInt(input[0]);
 			int k = Integer.parseInt(input[1]);
-			int n = Integer.parseInt(input[2]);
+			long n = Integer.parseInt(input[2]);
 			
-			int[] groups = new int[n];
+			long[] groups = new long[(int) n];
 			
 			// groups
 			input = in.readLine().split("\\ ");
@@ -47,7 +50,7 @@ public class ThemeParkSlowVersion {
 			}
 			
 			// group pointer
-			int g = 0;
+			long g = 0;
 			
 			int income = 0;
 			
@@ -59,9 +62,9 @@ public class ThemeParkSlowVersion {
 				// fill rollercoaster
 				int seatsTaken = 0;
 				
-				while(( seatsTaken + groups[g % n]) <= k && (groupRotation < n)){
+				while(( seatsTaken + groups[(int) (g % n)]) <= k && (groupRotation < n)){
 					// seats free
-					seatsTaken +=  groups[g % n];
+					seatsTaken +=  groups[(int) (g % n)];
 					g++;
 					groupRotation++;
 				}
@@ -78,6 +81,8 @@ public class ThemeParkSlowVersion {
 			
 			
 		}
+		
+		System.out.println("Time: "+ (new Date().getTime() - starttime) /1000);
 
 	}
 
