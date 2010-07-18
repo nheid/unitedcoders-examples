@@ -3,7 +3,7 @@ package com.unitedcoders.examples.codejam;
 /**
  * Example solution of the Google Code Jam: Snapper Chain problem
  * Detailed explanation: http://united-coders.com/nico-heid/google-code-jam-the-snapper-chain
- * @author nheid
+ * @author Nico Heid
  *
  */
 public class SnapperChain {
