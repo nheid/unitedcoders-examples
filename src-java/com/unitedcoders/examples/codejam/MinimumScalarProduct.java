@@ -51,6 +51,22 @@ public class MinimumScalarProduct {
 
     }
 
+    public static int getMinimumScalarProduct2(int[] x, int[] y) {
+
+        Arrays.sort(x);
+        Arrays.sort(y);
+        int sum=0;
+
+        for (int i = 0; i < x.length; i++) {
+            sum += x[i] * y[x.length -1 -i];
+        }
+
+
+        return sum;
+
+
+    }
+
 //    public static int[] reverse(int[] array) {
 //
 //        int[] result = new int[array.length];
