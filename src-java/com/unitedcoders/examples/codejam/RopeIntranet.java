@@ -1,7 +1,9 @@
+package com.unitedcoders.examples.codejam;
+
 import java.io.*;
 import java.util.*;
 
-public class Test {
+public class RopeIntranet {
 
    public static void main(String[] args) throws IOException {
 
