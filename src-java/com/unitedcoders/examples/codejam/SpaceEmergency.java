@@ -3,7 +3,6 @@ package com.unitedcoders.examples.codejam;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +12,7 @@ public class SpaceEmergency {
 
     public static void main(String[] args) throws IOException {
 
-        Scanner scanner = new Scanner(new File("B-small-practice.in"));
+        Scanner scanner = new Scanner(new File("B-large-practice.in"));
         PrintStream out = new PrintStream(new File("space.out"));
         int testcases = scanner.nextInt();
 
@@ -22,8 +21,9 @@ public class SpaceEmergency {
 
         for (int casenr = 1; casenr <= testcases; casenr++) {
 
-            Integer time = 0;
-//            Integer position = 0;
+            long time = 0;
+            Integer position = 0;
+            Integer starsPassed = 0;
             Integer boosters = scanner.nextInt();       // L
             long buildTime = scanner.nextLong();      // t
             Integer finalStar = scanner.nextInt();      // N
@@ -41,30 +41,35 @@ public class SpaceEmergency {
 
 
             // let the ship fly till the boosters are ready
-            while (track.size()>0 && track.get(0) <= buildTime) {
-                time += track.get(0);
-                buildTime -= track.get(0);
-                track.remove(0);
+            while (position < finalStar && track.get(position) <= buildTime) {
+                time += track.get(position);
+                buildTime -= track.get(position);
+                position++;
+                starsPassed++;
 
             }
             // check if we're between two planets when the boosters are ready
-            if (track.size() > 0 && buildTime > 0) {
+            if (position < finalStar && buildTime > 0) {
                 time += (int) buildTime;
-                track.set(0, track.get(0) - (int)buildTime);
+                track.set(position, track.get(position) - (int) buildTime);
             }
+
+            track = track.subList(starsPassed, track.size());
+            finalStar -= starsPassed;
+            position = 0;
 
             // reorder by distance use boosters on longest distance until we're out of boosters
             Collections.sort(track);
             Collections.reverse(track);
 
-            while (track.size() > 0) {
+            while (position < finalStar) {
                 if (boosters > 0) {
-                    time += track.get(0) / 2;
-                    track.remove(0);
+                    time += track.get(position) / 2;
+                    position++;
                     boosters--;
                 } else {
-                    time += track.get(0);
-                    track.remove(0);
+                    time += track.get(position);
+                    position++;
                 }
 
 
