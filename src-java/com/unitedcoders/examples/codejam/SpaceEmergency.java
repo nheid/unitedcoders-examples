@@ -24,6 +24,7 @@ public class SpaceEmergency {
             long time = 0;
             Integer position = 0;
             Integer starsPassed = 0;
+
             Integer boosters = scanner.nextInt();       // L
             long buildTime = scanner.nextLong();      // t
             Integer finalStar = scanner.nextInt();      // N
@@ -41,6 +42,7 @@ public class SpaceEmergency {
 
 
             // let the ship fly till the boosters are ready
+            // count the stars passed to remove them later
             while (position < finalStar && track.get(position) <= buildTime) {
                 time += track.get(position);
                 buildTime -= track.get(position);
@@ -54,6 +56,8 @@ public class SpaceEmergency {
                 track.set(position, track.get(position) - (int) buildTime);
             }
 
+            // get the remaining track, subtract the nr of stars we've already passed
+            // reset position to zero
             track = track.subList(starsPassed, track.size());
             finalStar -= starsPassed;
             position = 0;
